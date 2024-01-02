@@ -49,7 +49,7 @@ public class Main {
             switch (action){
                 case 0:
                     System.out.println("Playlist complete");
-                    quite = true;
+                    forward = true;
                     break;
                 case 1:
                     if(!forward){
@@ -64,7 +64,55 @@ public class Main {
                         System.out.println("No song available, reached to the end of the list");
                         forward = false;
                     }
-                    //Continue here coding 37.43
+                    break;
+                case 2:
+                    if(forward){
+                        if(listIterator.hasPrevious()){
+                            listIterator.previous();
+                        }
+                        forward = false;
+                    }
+                    if(listIterator.hasPrevious()){
+                        System.out.println("Now playing " + listIterator.previous().toString());
+                    }else{
+                        System.out.println("We are at the first song");
+                        forward=false;
+                    }
+                    break;
+                case 3:
+                    if(forward){
+                        if(listIterator.hasPrevious()){
+                            System.out.println("Now playing "+listIterator.previous().toString());
+                            forward=false;
+                        }else{
+                            System.out.println("We are at the start of the list");
+                        }
+                    }else{
+                        if(listIterator.hasNext()){
+                            System.out.println("Now playing"+listIterator.next().toString());
+                            forward=true;
+                        }else{
+                            System.out.println("We have reached to the end of the list");
+                        }
+                    }
+                    break;
+                case 4:
+                    printList(playlist);
+                    break;
+                case 5:
+                    printMenu();
+                    break;
+                case 6:
+                    if(playlist.size() >0){
+                        listIterator.remove();
+                        if(listIterator.hasNext()){
+                            System.out.println("Now playing "+listIterator.next().toString());
+
+                        }else{
+                            if(listIterator.hasPrevious())
+                            System.out.println("Now playing "+listIterator.previous().toString());
+                        }
+                    }
             }
         }
     }
